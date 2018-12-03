@@ -37,7 +37,7 @@ function kadai_3(age, callback) {
     alert(callback(age));
 }
 
-kadai_3(21, function(message) {
+const myCallback = function(message) {
     if(typeof(message) !== "number"){
         return "数値が入力されていません";
     } else if(message >= 20) {
@@ -47,7 +47,9 @@ kadai_3(21, function(message) {
     } else {
         return "値は10未満です";
     }
-});
+}
+
+kadai_3(21, myCallback);
 
 // 課題4: 以下の条件を満たす即時関数を作る
 //   - 2つの引数を受け取る
