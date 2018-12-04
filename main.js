@@ -4,6 +4,7 @@
 // ここに「ブロックスコープ」の説明を記述する
 /* 
 ブロック内で定義された関数・変数には同じブロック内からアクセスすることはできるが、ブロック外からはアクセスできない。
+また、ブロック内からはブロック外の変数・関数にアクセスできる。
 ちなみにブロックとは「{}」で囲まれた範囲のことをいう。
 */ 
 
@@ -14,6 +15,7 @@
 // ここに「関数スコープ」の説明を記述する
 /*
 関数内で定義された関数や変数には同じ関数内からはアクセスできるが、関数外からはアクセスできない。
+また、関数内から関数外の変数や関数にもアクセスできる。
 */
 
 
@@ -34,22 +36,32 @@
 //   - kadai_3関数を実装した直後に「kadai_3(数値, コールバック関数)」を呼び出して、アラートダイアログのメッセージ内容が意図通りであることを確認する
 
 function kadai_3(age, callback) {
-    alert(callback(age));
-}
-
-const myCallback = function(message) {
-    if(typeof(message) !== "number"){
-        return "数値が入力されていません";
-    } else if(message >= 20) {
-        return "値は20以上です";
-    } else if(message >= 10) {
-        return "値は10以上20未満です";
+    let message;
+    if(typeof(age) !== "number"){
+        message =  "数値が入力されていません";
+    } else if(age >= 20) {
+        message = "値は20以上です";
+    } else if(age >= 10) {
+        message = "値は10以上20未満です";
     } else {
-        return "値は10未満です";
+        message = "値は10未満です";
     }
+
+    callback(message);
 }
 
-kadai_3(21, myCallback);
+kadai_3(21, (message) => {
+    alert(message);
+});
+kadai_3(15, (message) => {
+    alert(message);
+});
+kadai_3(5, (message) => {
+    alert(message);
+});
+kadai_3("aaa", (message) => {
+    alert(message);
+});
 
 // 課題4: 以下の条件を満たす即時関数を作る
 //   - 2つの引数を受け取る
